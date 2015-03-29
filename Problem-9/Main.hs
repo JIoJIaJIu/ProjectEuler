@@ -13,4 +13,4 @@ find (x:xs) =
                 c = 1000 - a1 - b1
 
 main = do
-    print $ find [1..998]
+    print $ foldl1 (*) $ find [1..998]
