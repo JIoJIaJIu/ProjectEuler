@@ -4,16 +4,16 @@ str = "7316717653133062491922511967442657474235534919493496983520312774506326239
 
 find :: [Int] -> [Int]
 find [] = []
-find xs =
-    filter start end
+find (x:xs) =
+    filter start xs
         where
-            (start, end) = splitAt 13 xs
+            start = (x:take 12 xs)
             filter a [] = a
-            filter a b
-                | foldl1 (*) start > foldl1 (*) a = filter start end
-                | otherwise = filter a end
+            filter a (b1:b)
+                | product start > product a = filter start b
+                | otherwise = filter a b
                 where
-                    (start, end) = splitAt 13 b
+                    start = (b1:take 12 b)
 
 main = do
     print $ foldl1 (*) . find $ map digitToInt str
